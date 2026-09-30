@@ -1,0 +1,3103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<meta name="theme-color" content="#1e00ff">
+
+<title>GRAPHIC CHAOS</title>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+:root{
+    --yellow:#1e00ff;
+    --pink:#ff3c00;
+    --green:#ff004c;
+    --blue:#00A8FF;
+    --cream:#f0ead4;
+    --black:#111;
+
+    /*
+       Ces variables servent uniquement aux adaptations
+       responsive. Le design desktop reste basé sur tes
+       valeurs originales.
+    */
+    --mobile-padding:20px;
+    --tablet-padding:35px;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+}
+
+body{
+    width:100%;
+    min-height:100%;
+    background:#1100ff;
+    font-family:Inter,sans-serif;
+    color:var(--black);
+    overflow-x:hidden;
+
+    /*
+       Évite certains problèmes de texte trop large
+       sur Safari / iOS.
+    */
+    overflow-wrap:break-word;
+    -webkit-text-size-adjust:100%;
+}
+
+img,
+video{
+    max-width:100%;
+}
+
+button,
+a{
+    -webkit-tap-highlight-color:transparent;
+}
+
+button{
+    touch-action:manipulation;
+}
+
+section{
+    min-height:100vh;
+    min-height:100svh;
+    position:relative;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+    background:var(--yellow);
+    padding:50px;
+    overflow:hidden;
+}
+
+.big-year{
+    position:absolute;
+    left:-30px;
+    top:20px;
+
+    font-family:Anton;
+    font-size:20vw;
+
+    color:var(--pink);
+    line-height:.8;
+
+    /*
+       Empêche le texte géant de créer une largeur
+       supplémentaire sur mobile.
+    */
+    white-space:nowrap;
+    pointer-events:none;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    padding-top:250px;
+
+    color:#f0ead4;
+}
+
+.hero h1{
+    font-family:Anton;
+    font-size:11vw;
+    line-height:.85;
+    text-transform:uppercase;
+}
+
+.hero p{
+    margin-top:30px;
+    max-width:500px;
+    font-size:1.2rem;
+}
+
+
+/* =========================================================
+   PROJETS
+   ========================================================= */
+
+.project{
+    display:grid;
+    grid-template-columns:35% 65%;
+    min-height:100vh;
+    min-height:100svh;
+}
+
+.left{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.right{
+    background:var(--cream);
+    padding:60px;
+    min-width:0;
+}
+
+.vertical{
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+
+    font-family:Anton;
+    font-size:8vw;
+
+    text-transform:uppercase;
+    line-height:.8;
+
+    color:#f0ead4;
+
+    white-space:nowrap;
+}
+
+.number{
+    position:absolute;
+    bottom:20px;
+    left:20px;
+
+    font-size:10vw;
+    font-family:Anton;
+
+    opacity:.15;
+}
+
+.right h2{
+    font-family:Anton;
+    font-size:6vw;
+    line-height:.9;
+    text-transform:uppercase;
+
+    /*
+       Important pour éviter qu'un titre très long
+       agrandisse la page horizontalement.
+    */
+    overflow-wrap:anywhere;
+}
+
+.right p{
+    margin-top:30px;
+    max-width:700px;
+    line-height:1.8;
+}
+
+.grid{
+    margin-top:50px;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+    min-width:0;
+}
+
+.box{
+    aspect-ratio:1;
+
+    overflow:hidden;
+    position:relative;
+
+    cursor:pointer;
+
+    transition:transform 0.3s ease;
+
+    display:block;
+    min-width:0;
+}
+
+.box:hover{
+    transform:scale(1.02);
+}
+
+.box img,
+.box video{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+
+/* =========================================================
+   COULEURS
+   ========================================================= */
+
+.green{
+    background:var(--green);
+}
+
+.pink{
+    background:var(--pink);
+}
+
+.blue{
+    background:var(--blue);
+}
+
+.yellow{
+    background:var(--yellow);
+}
+
+.mix{
+    background:#0077ff;
+}
+
+
+/* =========================================================
+   FENÊTRES DE DESCRIPTION
+   ========================================================= */
+
+.project-desc-overlay{
+    position:fixed;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(17,0,255,0.95);
+
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:opacity 0.4s ease;
+
+    padding:30px;
+
+    /*
+       Important sur iPhone avec encoche.
+    */
+    padding-top:max(30px, env(safe-area-inset-top));
+    padding-right:max(30px, env(safe-area-inset-right));
+    padding-bottom:max(30px, env(safe-area-inset-bottom));
+    padding-left:max(30px, env(safe-area-inset-left));
+
+    overflow:hidden;
+}
+
+.project-desc-overlay:target{
+    opacity:1;
+    pointer-events:all;
+}
+
+.desc-box{
+    background:var(--cream);
+
+    max-width:1000px;
+    width:100%;
+
+    height:80vh;
+    height:80svh;
+
+    max-height:700px;
+
+    position:relative;
+
+    border:5px solid var(--pink);
+
+    box-shadow:15px 15px 0 var(--black);
+
+    display:grid;
+
+    grid-template-columns:55% 45%;
+    grid-template-rows:100%;
+
+    overflow:hidden;
+
+    min-width:0;
+    min-height:0;
+}
+
+
+/* =========================================================
+   CADRE VISUELS
+   ========================================================= */
+
+.desc-img-container{
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    min-height:0;
+    min-width:0;
+
+    background:var(--black);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.desc-img-container > img{
+    display:block;
+
+    width:auto;
+    height:auto;
+
+    max-width:100%;
+    max-height:100%;
+
+    object-fit:contain;
+
+    padding:10px;
+}
+
+.desc-img-container > video{
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    max-width:100%;
+    max-height:100%;
+
+    object-fit:contain;
+
+    background:var(--black);
+}
+
+
+/* =========================================================
+   CARROUSEL
+   ========================================================= */
+
+.carousel{
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    touch-action:pan-y;
+}
+
+.carousel-slide{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+    object-position:center;
+
+    padding:10px;
+
+    opacity:0;
+
+    transition:opacity 0.3s;
+
+    user-select:none;
+    -webkit-user-drag:none;
+}
+
+.carousel-slide.active{
+    opacity:1;
+}
+
+.carousel-btn{
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    background:var(--pink);
+    color:var(--cream);
+
+    border:none;
+
+    font-family:'Anton',sans-serif;
+    font-size:1.8rem;
+
+    width:50px;
+    height:50px;
+
+    cursor:pointer;
+
+    z-index:5;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+
+    user-select:none;
+}
+
+.carousel-btn:hover{
+    background:var(--black);
+}
+
+.carousel-btn.prev{
+    left:10px;
+}
+
+.carousel-btn.next{
+    right:10px;
+}
+
+.carousel-count{
+    position:absolute;
+
+    bottom:10px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:var(--cream);
+
+    font-family:'Anton',sans-serif;
+
+    letter-spacing:2px;
+
+    z-index:5;
+
+    background:rgba(0,0,0,.35);
+
+    padding:4px 10px;
+
+    border-radius:2px;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   TEXTE DESCRIPTION
+   ========================================================= */
+
+.desc-text-container{
+    padding:40px 30px 40px 40px;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+
+    min-height:0;
+    max-height:100%;
+
+    /*
+       Permet le scroll fluide sur iPhone.
+    */
+    -webkit-overflow-scrolling:touch;
+
+    overscroll-behavior:contain;
+}
+
+.desc-text-container::-webkit-scrollbar{
+    width:8px;
+}
+
+.desc-text-container::-webkit-scrollbar-track{
+    background:rgba(0,0,0,0.05);
+}
+
+.desc-text-container::-webkit-scrollbar-thumb{
+    background:var(--pink);
+    border-radius:4px;
+}
+
+.desc-text-container::-webkit-scrollbar-thumb:hover{
+    background:var(--black);
+}
+
+.desc-box h3{
+    font-family:'Anton',sans-serif;
+
+    font-size:3rem;
+
+    text-transform:uppercase;
+    line-height:0.9;
+
+    margin-bottom:20px;
+
+    color:var(--black);
+
+    overflow-wrap:anywhere;
+}
+
+.desc-box p{
+    font-size:0.95rem;
+    line-height:1.6;
+
+    color:#333;
+
+    overflow-wrap:anywhere;
+}
+
+
+/* =========================================================
+   FERMETURE POPUP
+   ========================================================= */
+
+.close-desc{
+    position:absolute;
+
+    top:15px;
+    right:20px;
+
+    font-family:'Anton',sans-serif;
+
+    font-size:2.5rem;
+
+    text-decoration:none;
+
+    color:var(--pink);
+
+    transition:transform 0.2s;
+
+    z-index:10;
+
+    /*
+       Zone tactile correcte.
+    */
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    line-height:1;
+}
+
+.close-desc:hover{
+    transform:scale(1.2);
+}
+
+
+/* =========================================================
+   TYPOGRAPHIE
+   ========================================================= */
+
+.type-section{
+    background:#9d00ff;
+    color:#f0ead4;
+
+    padding:80px;
+
+    overflow:hidden;
+}
+
+.type-section h2{
+    font-family:Anton;
+
+    font-size:18vw;
+
+    line-height:.8;
+
+    text-transform:uppercase;
+
+    overflow-wrap:anywhere;
+}
+
+.type-section p{
+    max-width:700px;
+
+    font-size:1.2rem;
+
+    margin-top:40px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact{
+    background:var(--green);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
+
+    text-align:center;
+
+    padding:40px;
+}
+
+.contact h2{
+    font-family:Anton;
+
+    font-size:15vw;
+
+    line-height:.8;
+
+    text-transform:uppercase;
+
+    color:#f0ead4;
+
+    overflow-wrap:anywhere;
+}
+
+.contact p{
+    font-size:1.2rem;
+
+    margin-top:20px;
+
+    color:#f0ead4;
+
+    max-width:100%;
+}
+
+.contact a{
+    color:#f0ead4;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    overflow-wrap:anywhere;
+}
+
+
+/* =========================================================
+   TABLETTE
+   901px -> 1100px
+   ========================================================= */
+
+@media (min-width:901px) and (max-width:1100px){
+
+    /*
+       On garde la structure PC mais on réduit légèrement
+       les espaces pour les écrans intermédiaires.
+    */
+
+    .right{
+        padding:45px;
+    }
+
+    .hero{
+        padding:45px;
+    }
+
+    .type-section{
+        padding:60px;
+    }
+
+    .desc-box{
+        width:94%;
+        height:82vh;
+        height:82svh;
+    }
+}
+
+
+/* =========================================================
+   MOBILE + PETITE TABLETTE
+   max-width:900px
+   ========================================================= */
+
+@media (max-width:900px){
+
+    html{
+        overflow-x:hidden;
+    }
+
+    body{
+        width:100%;
+        overflow-x:hidden;
+    }
+
+
+    /* -----------------------------------------
+       SECTIONS
+    ----------------------------------------- */
+
+    section{
+        min-height:100svh;
+    }
+
+
+    /* -----------------------------------------
+       HERO
+    ----------------------------------------- */
+
+    .hero{
+        min-height:100svh;
+
+        padding:
+            30px
+            25px
+            50px;
+
+        display:flex;
+        align-items:flex-start;
+
+        overflow:hidden;
+    }
+
+    .big-year{
+        left:-15px;
+        top:25px;
+
+        /*
+           Taille contrôlée au lieu d'un énorme 20vw
+           qui peut devenir bizarre sur téléphone.
+        */
+        font-size:clamp(5rem,24vw,11rem);
+
+        line-height:.8;
+    }
+
+    .hero-content{
+        padding-top:clamp(150px,35vh,250px);
+
+        width:100%;
+        max-width:100%;
+    }
+
+    .hero h1{
+        font-size:clamp(4rem,16vw,7rem);
+
+        line-height:.85;
+
+        max-width:100%;
+
+        overflow-wrap:anywhere;
+    }
+
+    .hero p{
+        margin-top:25px;
+
+        max-width:600px;
+
+        font-size:clamp(1rem,3.5vw,1.2rem);
+
+        line-height:1.55;
+    }
+
+
+    /* -----------------------------------------
+       PROJETS
+    ----------------------------------------- */
+
+    .project{
+        grid-template-columns:1fr;
+
+        min-height:auto;
+    }
+
+    .left{
+        min-height:250px;
+
+        height:35svh;
+
+        max-height:400px;
+    }
+
+    .vertical{
+        writing-mode:horizontal-tb;
+
+        text-orientation:mixed;
+
+        font-size:clamp(3.2rem,11vw,5rem);
+
+        line-height:.85;
+
+        text-align:center;
+
+        white-space:normal;
+
+        padding:20px;
+
+        max-width:100%;
+    }
+
+    .number{
+        bottom:15px;
+        left:15px;
+
+        font-size:clamp(4rem,15vw,7rem);
+    }
+
+    .right{
+        padding:clamp(25px,6vw,50px);
+
+        width:100%;
+        min-width:0;
+    }
+
+    .right h2{
+        font-size:clamp(3.5rem,12vw,6rem);
+
+        line-height:.85;
+    }
+
+    .right p{
+        font-size:1rem;
+
+        line-height:1.6;
+    }
+
+    .grid{
+        margin-top:35px;
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+        width:100%;
+    }
+
+    .box{
+        width:100%;
+        aspect-ratio:1;
+    }
+
+
+    /* -----------------------------------------
+       TYPE SECTION
+    ----------------------------------------- */
+
+    .type-section{
+        padding:
+            60px
+            25px
+            70px;
+
+        min-height:auto;
+    }
+
+    .type-section h2{
+        font-size:clamp(4rem,18vw,7rem);
+
+        line-height:.82;
+    }
+
+    .type-section p{
+        font-size:1rem;
+
+        line-height:1.6;
+
+        margin-top:30px;
+    }
+
+
+    /* -----------------------------------------
+       CONTACT
+    ----------------------------------------- */
+
+    .contact{
+        min-height:100svh;
+
+        padding:
+            40px
+            20px
+            max(40px, env(safe-area-inset-bottom));
+    }
+
+    .contact h2{
+        font-size:clamp(4rem,18vw,7rem);
+
+        line-height:.82;
+    }
+
+    .contact p{
+        font-size:1rem;
+
+        line-height:1.5;
+
+        max-width:100%;
+    }
+
+
+    /* -----------------------------------------
+       POPUPS
+    ----------------------------------------- */
+
+    .project-desc-overlay{
+        align-items:center;
+        justify-content:center;
+
+        padding:
+            15px
+            max(15px, env(safe-area-inset-right))
+            max(15px, env(safe-area-inset-bottom))
+            max(15px, env(safe-area-inset-left));
+    }
+
+    .desc-box{
+        width:100%;
+        height:92svh;
+
+        max-height:none;
+
+        border-width:4px;
+
+        box-shadow:8px 8px 0 var(--black);
+
+        grid-template-columns:1fr;
+        grid-template-rows:45% 55%;
+
+        overflow:hidden;
+    }
+
+    .desc-img-container{
+        width:100%;
+        height:100%;
+
+        min-height:0;
+    }
+
+    .desc-img-container > img{
+        max-width:100%;
+        max-height:100%;
+
+        padding:8px;
+    }
+
+    .desc-img-container > video{
+        width:100%;
+        height:100%;
+    }
+
+
+    /* -----------------------------------------
+       CARROUSEL MOBILE
+    ----------------------------------------- */
+
+    .carousel{
+        width:100%;
+        height:100%;
+    }
+
+    .carousel-slide{
+        padding:8px;
+    }
+
+    .carousel-btn{
+        width:48px;
+        height:48px;
+
+        font-size:1.7rem;
+    }
+
+    .carousel-btn.prev{
+        left:8px;
+    }
+
+    .carousel-btn.next{
+        right:8px;
+    }
+
+    .carousel-count{
+        bottom:8px;
+
+        font-size:.9rem;
+
+        padding:4px 8px;
+    }
+
+
+    /* -----------------------------------------
+       TEXTE POPUP MOBILE
+    ----------------------------------------- */
+
+    .desc-text-container{
+        padding:
+            35px
+            20px
+            25px;
+
+        overflow-y:auto;
+
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .desc-box h3{
+        font-size:clamp(2rem,9vw,3rem);
+
+        line-height:.9;
+
+        margin-bottom:18px;
+
+        padding-right:35px;
+    }
+
+    .desc-box p{
+        font-size:.95rem;
+
+        line-height:1.6;
+    }
+
+    .close-desc{
+        top:7px;
+        right:8px;
+
+        width:45px;
+        height:45px;
+
+        font-size:2rem;
+    }
+}
+
+
+/* =========================================================
+   TELEPHONES
+   max-width:600px
+   ========================================================= */
+
+@media (max-width:600px){
+
+    .hero{
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .big-year{
+        left:-10px;
+        top:20px;
+
+        font-size:23vw;
+    }
+
+    .hero-content{
+        padding-top:clamp(140px,31vh,210px);
+    }
+
+    .hero h1{
+        font-size:clamp(3.8rem,17vw,6rem);
+    }
+
+    .hero p{
+        font-size:.98rem;
+    }
+
+
+    /* Projets */
+
+    .left{
+        height:30svh;
+        min-height:220px;
+    }
+
+    .vertical{
+        font-size:clamp(2.8rem,11vw,4.5rem);
+    }
+
+    .right{
+        padding:30px 20px 45px;
+    }
+
+    .right h2{
+        font-size:clamp(3.2rem,14vw,5rem);
+    }
+
+    .grid{
+        gap:18px;
+    }
+
+
+    /* Type */
+
+    .type-section{
+        padding:55px 20px 65px;
+    }
+
+    .type-section h2{
+        font-size:clamp(3.8rem,19vw,6rem);
+    }
+
+
+    /* Contact */
+
+    .contact{
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+    .contact h2{
+        font-size:clamp(3.8rem,19vw,6rem);
+    }
+
+    .contact p{
+        font-size:.95rem;
+    }
+
+
+    /* Popups */
+
+    .project-desc-overlay{
+        padding:10px;
+    }
+
+    .desc-box{
+        width:100%;
+
+        height:94svh;
+
+        grid-template-rows:42% 58%;
+
+        border-width:3px;
+
+        box-shadow:6px 6px 0 var(--black);
+    }
+
+    .desc-text-container{
+        padding:
+            30px
+            18px
+            20px;
+    }
+
+    .desc-box h3{
+        font-size:clamp(1.9rem,9vw,2.6rem);
+
+        margin-bottom:15px;
+    }
+
+    .desc-box p{
+        font-size:.9rem;
+
+        line-height:1.55;
+    }
+
+    .carousel-btn{
+        width:44px;
+        height:44px;
+
+        font-size:1.5rem;
+    }
+
+    .carousel-btn.prev{
+        left:5px;
+    }
+
+    .carousel-btn.next{
+        right:5px;
+    }
+
+    .carousel-count{
+        font-size:.8rem;
+    }
+}
+
+
+/* =========================================================
+   TRÈS PETITS TÉLÉPHONES
+   max-width:380px
+   ========================================================= */
+
+@media (max-width:380px){
+
+    .hero{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .hero h1{
+        font-size:3.5rem;
+    }
+
+    .hero p{
+        font-size:.9rem;
+    }
+
+    .left{
+        min-height:190px;
+    }
+
+    .vertical{
+        font-size:2.5rem;
+    }
+
+    .right{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .right h2{
+        font-size:3rem;
+    }
+
+    .type-section h2{
+        font-size:3.4rem;
+    }
+
+    .contact h2{
+        font-size:3.4rem;
+    }
+
+    .desc-box{
+        height:95svh;
+
+        grid-template-rows:40% 60%;
+    }
+
+    .desc-text-container{
+        padding:28px 15px 18px;
+    }
+
+    .desc-box h3{
+        font-size:1.8rem;
+    }
+
+    .desc-box p{
+        font-size:.85rem;
+    }
+}
+
+
+/* =========================================================
+   MODE PAYSAGE SUR TÉLÉPHONE
+   ========================================================= */
+
+@media (max-width:900px) and (orientation:landscape){
+
+    .hero{
+        min-height:100svh;
+    }
+
+    .hero-content{
+        padding-top:120px;
+    }
+
+    .hero h1{
+        font-size:clamp(3.5rem,12vw,6rem);
+    }
+
+    .hero p{
+        max-width:650px;
+    }
+
+    .left{
+        height:45svh;
+        min-height:180px;
+    }
+
+    .desc-box{
+        height:94svh;
+
+        grid-template-columns:45% 55%;
+        grid-template-rows:1fr;
+    }
+
+    .desc-text-container{
+        padding:25px 20px;
+    }
+
+    .desc-box h3{
+        font-size:2rem;
+    }
+
+    .desc-box p{
+        font-size:.85rem;
+    }
+}
+
+
+/* =========================================================
+   ÉCRANS TRÈS HAUTS
+   ========================================================= */
+
+@media (min-width:1400px){
+
+    /*
+       On ne change pas la composition desktop.
+       On évite simplement que certains textes deviennent
+       disproportionnés sur des écrans géants.
+    */
+
+    .hero h1{
+        font-size:min(11vw,170px);
+    }
+
+    .right h2{
+        font-size:min(6vw,95px);
+    }
+
+    .type-section h2{
+        font-size:min(18vw,260px);
+    }
+
+    .contact h2{
+        font-size:min(15vw,220px);
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITÉ / MOUVEMENT
+   ========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:0.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:0.01ms !important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ========================================================
+     HERO
+     ======================================================== -->
+
+<section class="hero">
+
+    <div class="big-year">
+        PORTFOLIO
+    </div>
+
+    <div class="hero-content">
+
+        <h1>
+            LLORCA<br>
+            LUNA
+        </h1>
+
+        <p>
+            Étudiante en troisième année de design graphique,
+            curieuse et créative, j’aime apprendre sur le terrain,
+            explorer de nouvelles approches visuelles et donner
+            du sens à mes créations à travers des&nbsp;projets&nbsp;concrets.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     SECTION 01
+     ======================================================== -->
+
+<section class="project">
+
+    <div class="left green">
+
+        <div class="vertical">
+            TRAVAUX MANUELS
+        </div>
+
+        <div class="number">
+            01
+        </div>
+
+    </div>
+
+
+    <div class="right">
+
+        <h2>
+            coupé / collé
+        </h2>
+
+        <div class="grid">
+
+            <a href="#proj-1-1" class="box blue">
+                <img
+                    src="image/IMG_3633.JPEG"
+                    alt="Projet Vénus"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-1-2" class="box yellow">
+                <img
+                    src="image/IMG_7680.JPEG"
+                    alt="Projet Scénographie"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-1-3" class="box green">
+                <img
+                    src="image/Capture d’écran 2026-09-29 à 11.42.46.png"
+                    alt="Projet Journal"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-1-4" class="box pink">
+                <img
+                    src="image/fanzine.png"
+                    alt="Projet Fanzine textures"
+                    loading="lazy"
+                >
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     SECTION 02
+     ======================================================== -->
+
+<section class="project">
+
+    <div class="left pink">
+
+        <div class="vertical">
+            TRAVAUX DIGITAUX
+        </div>
+
+        <div class="number">
+            02
+        </div>
+
+    </div>
+
+
+    <div class="right">
+
+        <h2>
+            ctrl c / ctrl v
+        </h2>
+
+        <div class="grid">
+
+            <a href="#proj-2-1" class="box blue">
+                <img
+                    src="image/sale%20temps.png"
+                    alt="Projet Sneakers"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-2-2" class="box yellow">
+                <img
+                    src="image/Capture%20d’écran%202026-09-29%20à%2011.08.17.png"
+                    alt="Projet IA"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-2-3" class="box green">
+                <img
+                    src="image/livre%20moi.jpeg"
+                    alt="Projet Couverture"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-2-4" class="box pink">
+                <img
+                    src="image/AdobeStock_107964785.jpeg"
+                    alt="Projet Mellifère"
+                    loading="lazy"
+                >
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     SECTION 03
+     ======================================================== -->
+
+<section class="project">
+
+    <div class="left mix">
+
+        <div class="vertical">
+            TECHNIQUES MIXTES
+        </div>
+
+        <div class="number">
+            03
+        </div>
+
+    </div>
+
+
+    <div class="right">
+
+        <h2>
+            coupé / ctrl v
+        </h2>
+
+        <div class="grid">
+
+            <a href="#proj-3-1" class="box green">
+                <img
+                    src="image/motion.png"
+                    alt="Motion Design"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-3-2" class="box pink">
+                <img
+                    src="image/Stickers%20VDF.jpeg"
+                    alt="Projet Vues d'en face"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-3-3" class="box yellow">
+                <img
+                    src="image/Capture%20d’écran%202025-10-14%20à%2009.01.57.png"
+                    alt="Projet Affiche éphémère"
+                    loading="lazy"
+                >
+            </a>
+
+            <a href="#proj-3-4" class="box blue">
+                <img
+                    src="image/graphicmatter.png"
+                    alt="Projet Fanzine"
+                    loading="lazy"
+                >
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     TYPE
+     ======================================================== -->
+
+<section class="type-section">
+
+    <h2>
+        VISUAL<br>
+        CONTRAST
+    </h2>
+
+    <p>
+        Une approche brute et instinctive où le graphisme
+        bouscule les codes. Inspirée par l'esthétique des fanzines,
+        le choc des couleurs et le désordre maîtrisé, j'aime créer
+        des contrastes forts qui captent immédiatement le regard
+        et bousculent les habitudes visuelles.
+    </p>
+
+</section>
+
+
+<!-- ========================================================
+     CONTACT
+     ======================================================== -->
+
+<section class="contact">
+
+    <h2>
+        LET'S <br>
+        TALK
+    </h2>
+
+    <p>
+        <a href="mailto:lunallorcaescamilla@outlook.fr">
+            lunallorcaescamilla@outlook.fr
+            <br>
+            07 68 44 04 60
+        </a>
+    </p>
+
+</section>
+
+
+
+<!-- ========================================================
+     POPUPS
+     SECTION 01
+     ======================================================== -->
+
+
+<!-- PROJET 1.1 -->
+
+<div class="project-desc-overlay" id="proj-1-1">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <div class="carousel">
+
+                <img
+                    class="carousel-slide active"
+                    src="image/IMG_3633.JPEG"
+                    alt="Projet VÉNUS 1"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/venus%20collage.png"
+                    alt="Projet VÉNUS 2"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/venus%20craie.png"
+                    alt="Projet VÉNUS 3"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/venus%20fusain.png"
+                    alt="Projet VÉNUS 4"
+                >
+
+                <button
+                    class="carousel-btn prev"
+                    type="button"
+                    aria-label="Image précédente"
+                >
+                    ‹
+                </button>
+
+                <button
+                    class="carousel-btn next"
+                    type="button"
+                    aria-label="Image suivante"
+                >
+                    ›
+                </button>
+
+                <div class="carousel-count">
+                    1 / 4
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                LA VÉNUS
+            </h3>
+
+            <p>
+                Travail de groupe autour de la Vénus endormie
+                de Giorgione et Titien : chacun a reproduit trois
+                parties du tableau. Mes pièces associent collage,
+                fusain et craie.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 1.2 -->
+
+<div class="project-desc-overlay" id="proj-1-2">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <div class="carousel">
+
+                <!--
+                    ATTENTION :
+                    HEIC n'est pas compatible partout.
+                    Convertis idéalement cette image en JPG/WebP.
+                -->
+
+                <img
+                    class="carousel-slide active"
+                    src="image/IMG_3704.HEIC"
+                    alt="Projet SCÉNOGRAPHIE 1"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/IMG_6666.jpg"
+                    alt="Projet SCÉNOGRAPHIE 2"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/IMG_7680.JPEG"
+                    alt="Projet SCÉNOGRAPHIE 3"
+                >
+
+                <button
+                    class="carousel-btn prev"
+                    type="button"
+                    aria-label="Image précédente"
+                >
+                    ‹
+                </button>
+
+                <button
+                    class="carousel-btn next"
+                    type="button"
+                    aria-label="Image suivante"
+                >
+                    ›
+                </button>
+
+                <div class="carousel-count">
+                    1 / 3
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                SCÉNOGRAPHIES
+            </h3>
+
+            <p>
+                Mes scénographies sont pensées comme des expériences
+                immersives : le spectateur voyage à travers un nouveau
+                monde qui révèle où je me dirige pour mon futur.
+                Un tableau d'enquête relie mes projets en les classant.
+                Un écran d'ordinateur des années 2000 montre comment
+                on retravaille les choses, et jusqu'où ça nous emmène.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 1.3 -->
+
+<div class="project-desc-overlay" id="proj-1-3">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <div class="carousel">
+
+                <img
+                    class="carousel-slide active"
+                    src="image/foie.png"
+                    alt="Projet JOURNAL 1"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/bus.png"
+                    alt="Projet JOURNAL 2"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/urne.png"
+                    alt="Projet JOURNAL 3"
+                >
+
+                <button
+                    class="carousel-btn prev"
+                    type="button"
+                    aria-label="Image précédente"
+                >
+                    ‹
+                </button>
+
+                <button
+                    class="carousel-btn next"
+                    type="button"
+                    aria-label="Image suivante"
+                >
+                    ›
+                </button>
+
+                <div class="carousel-count">
+                    1 / 3
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                PUBLICITÉS
+            </h3>
+
+            <p>
+                Pour le journal créé en classe, j'ai réalisé trois
+                publicités pensées pour attirer l'œil et ne pas laisser
+                indifférent. Je mélange plusieurs techniques, comme
+                le collage, la photocopie et la typographie, pour
+                obtenir un style brut, direct et un peu décalé,
+                avec un parti pris osé que j'assume jusqu'au bout.
+                Le noir et blanc leur donne un côté fait main,
+                presque fanzine, qui colle à l'esprit d'un journal
+                de classe.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 1.4 -->
+
+<div class="project-desc-overlay" id="proj-1-4">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <video
+                controls
+                playsinline
+                preload="metadata"
+            >
+                <source
+                    src="image/fanzine%20fab.mp4"
+                    type="video/mp4"
+                >
+
+                Ton navigateur ne peut pas lire cette vidéo.
+
+            </video>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                Fanzine
+            </h3>
+
+            <p>
+                Pour ce projet, j’ai photographié divers objets du
+                quotidien aux textures intéressantes, avant de convertir
+                les clichés en noir et blanc et de les retoucher pour
+                mettre en valeur les textures. J’ai ensuite procédé
+                à leur mise en page et les ai imprimés pour en faire
+                un petit fanzine.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================
+     SECTION 02
+     ======================================================== -->
+
+
+<!-- PROJET 2.1 -->
+
+<div class="project-desc-overlay" id="proj-2-1">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <img
+                src="image/sale%20temps.png"
+                alt="PROJET SNEAKERS Grand"
+            >
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                AFFICHE SNEAKERS
+            </h3>
+
+            <p>
+                Pour ce projet d’affiche, j’ai choisi de travailler
+                autour de l’univers des sneakers, un domaine qui me
+                passionne particulièrement. J’ai voulu mêler cette
+                passion avec le graphisme afin de créer une composition
+                visuelle qui met en valeur à la fois l’objet et son
+                esthétique.
+
+                <br><br>
+
+                Je me suis orienté vers un style futuriste, en essayant
+                d’explorer des visuels modernes avec des effets,
+                des lumières et une ambiance inspirée de l’univers
+                technologique.
+
+                <br><br>
+
+                L’idée était de donner une dimension plus innovante
+                et dynamique à la sneaker, en la sortant de son
+                contexte habituel.
+
+                <br><br>
+
+                Cette affiche a été entièrement réalisée sur Photoshop,
+                ce qui m’a permis de travailler en profondeur les détails,
+                les textures et l’ambiance globale de la création.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 2.2 -->
+
+<div class="project-desc-overlay" id="proj-2-2">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <div class="carousel">
+
+                <img
+                    class="carousel-slide active"
+                    src="image/Llorca%20-%20Workshop%20IA_page-0002.jpg"
+                    alt="Projet IA 1"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Llorca%20-%20Workshop%20IA_page-0003.jpg"
+                    alt="Projet IA 2"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Llorca%20-%20Workshop%20IA_page-0004.jpg"
+                    alt="Projet IA 3"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Llorca%20-%20Workshop%20IA_page-0005.jpg"
+                    alt="Projet IA 4"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Llorca%20-%20Workshop%20IA_page-0006.jpg"
+                    alt="Projet IA 5"
+                >
+
+                <button
+                    class="carousel-btn prev"
+                    type="button"
+                    aria-label="Image précédente"
+                >
+                    ‹
+                </button>
+
+                <button
+                    class="carousel-btn next"
+                    type="button"
+                    aria-label="Image suivante"
+                >
+                    ›
+                </button>
+
+                <div class="carousel-count">
+                    1 / 5
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                Utilisation de l'IA
+            </h3>
+
+            <p>
+                Pendant une semaine, on a appris à comprendre et
+                à utiliser l'intelligence artificielle, avec un défi :
+                retravailler ou créer une enseigne.
+
+                <br><br>
+
+                J'ai choisi de relooker un fast food en changeant
+                toute sa charte graphique.
+
+                <br><br>
+
+                Je n'ai pas utilisé l'IA pour qu'elle crée à ma place,
+                mais comme un outil qui m'aide à avancer dans mon
+                travail : toutes les idées viennent de moi.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 2.3 -->
+
+<div class="project-desc-overlay" id="proj-2-3">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <div class="carousel">
+
+                <img
+                    class="carousel-slide active"
+                    src="image/livre%20moi.jpeg"
+                    alt="Projet couverture 1"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Nina%20Vasseur.jpeg"
+                    alt="Projet couverture 2"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Camille%20Ortega.jpeg"
+                    alt="Projet couverture 3"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Luna%20Leclerc.jpeg"
+                    alt="Projet couverture 4"
+                >
+
+                <button
+                    class="carousel-btn prev"
+                    type="button"
+                    aria-label="Image précédente"
+                >
+                    ‹
+                </button>
+
+                <button
+                    class="carousel-btn next"
+                    type="button"
+                    aria-label="Image suivante"
+                >
+                    ›
+                </button>
+
+                <div class="carousel-count">
+                    1 / 4
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                COUVERTURE
+            </h3>
+
+            <p>
+                L'objectif était de produire des couvertures de livres
+                de poche pour former une collection autour de divers
+                titres sur l'architecture.
+
+                <br><br>
+
+                Chaque couverture part du titre pour construire un
+                visuel qui en traduit le sens.
+
+                <br><br>
+
+                Pour Topographie de la mémoire, le orange et les
+                lignes curvilignes évoquent le mouvement, comme des
+                flammes, et dessinent le chemin parcouru par l'autrice
+                entre les architectures observées dans son carnet :
+                la couverture met en avant le dynamisme et la
+                stimulation visuelle.
+
+                <br><br>
+
+                Pour Cartographie des instabilités, le rouge et les
+                triangles symbolisent le danger sous toutes ses formes,
+                des zones à risques aux bouleversements soudains,
+                qui surgissent avec une brutalité aiguisée,
+                presque poignardante.
+
+                <br><br>
+
+                Enfin, pour Forêts, clairières & fondations, le vert
+                représente la nature, l'équilibre et une cohabitation
+                harmonieuse entre l'environnement naturel et
+                l'architecture, tandis que les formes rectangulaires
+                font écho aux structures construites et suggèrent
+                une articulation entre le naturel et l'artificiel.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 2.4 -->
+
+<div class="project-desc-overlay" id="proj-2-4">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <div class="carousel">
+
+                <img
+                    class="carousel-slide active"
+                    src="image/AdobeStock_107964785.jpeg"
+                    alt="Projet mellifère 1"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Sans%20titre-1.png"
+                    alt="Projet mellifère 2"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/tel.png"
+                    alt="Projet mellifère 3"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/tout.png"
+                    alt="Projet mellifère 4"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/affiche.png"
+                    alt="Projet mellifère 5"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/roll%20up.png"
+                    alt="Projet mellifère 6"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/stand.png"
+                    alt="Projet mellifère 7"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/AdobeStock_331006009.png"
+                    alt="Projet mellifère 8"
+                >
+
+                <button
+                    class="carousel-btn prev"
+                    type="button"
+                    aria-label="Image précédente"
+                >
+                    ‹
+                </button>
+
+                <button
+                    class="carousel-btn next"
+                    type="button"
+                    aria-label="Image suivante"
+                >
+                    ›
+                </button>
+
+                <div class="carousel-count">
+                    1 / 8
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                IDENTITÉ VISUELLE
+            </h3>
+
+            <p>
+                Pour ce projet, il fallait créer l'identité visuelle
+                complète de Mellifère, une marque de miel de saison
+                vendu par un apiculteur migrateur, qui travaille au
+                rythme des abeilles et de la nature.
+
+                <br><br>
+
+                Pour ma part, je suis parti sur l'idée du voyage.
+
+                <br><br>
+
+                Les étiquettes ont des alvéoles en fond qui font écho
+                à des cartes topographiques, avec un timbre, et une
+                typographie manuscrite qui garde l'esprit du carnet
+                de voyage.
+
+                <br><br>
+
+                Le logo, volontairement brut, rappelle à la fois
+                le M de la marque et des ailes d'abeille abstraites.
+
+                <br><br>
+
+                J'ai ensuite déployé l'identité sur le packaging,
+                le merchandising et la boutique en ligne.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================
+     SECTION 03
+     ======================================================== -->
+
+
+<!-- PROJET 3.1 -->
+
+<div class="project-desc-overlay" id="proj-3-1">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <video
+                src="image/Animation%20LLORCA.mp4"
+                controls
+                autoplay
+                muted
+                loop
+                playsinline
+            ></video>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                MOTION DESIGN
+            </h3>
+
+            <p>
+                Comment se raconter en quelques secondes ?
+
+                <br><br>
+
+                Pour ce projet de motion design, j'ai écrit un texte
+                sur moi, puis je l'ai présenté et illustré en animation.
+
+                <br><br>
+
+                Le résultat est un autoportrait où les mots et les images
+                racontent ma personnalité.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 3.2 -->
+
+<div class="project-desc-overlay" id="proj-3-2">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <div class="carousel">
+
+                <img
+                    class="carousel-slide active"
+                    src="image/vdf.png"
+                    alt="Projet vdf 1"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Stickers%20VDF.jpeg"
+                    alt="Projet vdf 2"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Intagram%20VDF.jpeg"
+                    alt="Projet vdf 3"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/totbagVDF.jpeg"
+                    alt="Projet vdf 4"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/sites%20vdf.jpeg"
+                    alt="Projet vdf 5"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/VDF%20marque%20page.jpeg"
+                    alt="Projet vdf 6"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/livret.jpeg"
+                    alt="Projet vdf 7"
+                >
+
+                <img
+                    class="carousel-slide"
+                    src="image/Mockup%20arret%20de%20bus.jpeg"
+                    alt="Projet vdf 8"
+                >
+
+                <button
+                    class="carousel-btn prev"
+                    type="button"
+                    aria-label="Image précédente"
+                >
+                    ‹
+                </button>
+
+                <button
+                    class="carousel-btn next"
+                    type="button"
+                    aria-label="Image suivante"
+                >
+                    ›
+                </button>
+
+                <div class="carousel-count">
+                    1 / 8
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                VUES D'EN FACE
+            </h3>
+
+            <p>
+                Pour ce projet, il nous a été demandé de créer une
+                affiche pour un festival de films LGBTQIA+ à Grenoble.
+
+                <br><br>
+
+                Notre objectif était de concevoir une affiche à la fois
+                festive et percutante, tout en évitant les stéréotypes
+                de genre et proposer une représentation inclusive et
+                originale.
+
+                <br><br>
+
+                Pour mon affiche, j’ai rapidement su dans quelle
+                direction aller : je voulais intégrer une grande
+                quantité d’yeux.
+
+                <br><br>
+
+                Mon objectif était d’attirer immédiatement le regard
+                des passants dans la rue grâce à une affiche visible
+                de loin, presque dérangeante, comme si elle nous
+                observait en retour.
+
+                <br><br>
+
+                Cette accumulation d’yeux crée une forme d’oppression
+                volontaire, destinée à intriguer le spectateur.
+
+                <br><br>
+
+                L’idée était que plus on regarde l’affiche, plus on
+                découvre les informations essentielles sur le festival.
+
+                <br><br>
+
+                Pour la typographie, j’ai choisi de créer moi-même
+                le mot « vues d’en face » afin de conserver une
+                cohérence graphique avec le reste de la composition,
+                notamment son aspect volontairement désordonné.
+
+                <br><br>
+
+                Pour les autres textes, j’ai sélectionné une police
+                plus simple afin de garantir une lecture claire des
+                informations importantes liées au festival.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 3.3 -->
+
+<div class="project-desc-overlay" id="proj-3-3">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <img
+                src="image/Capture%20d’écran%202025-10-14%20à%2009.01.57.png"
+                alt="Projet AFFICHE Grand"
+            >
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                DESIGN GRAPHIQUE
+            </h3>
+
+            <p>
+                Pour ce projet, l’objectif était de représenter la
+                pollution visuelle à travers une affiche.
+
+                <br><br>
+
+                J’ai choisi de détourner cette notion pour montrer
+                que ce que l’on considère comme une pollution n’en
+                est pas forcément une.
+
+                <br><br>
+
+                Pour ce faire, je suis allée photographier une grande
+                quantité de tags et de graffitis, que j’ai ensuite
+                imprimés, déchirés, découpés, collés et scannés,
+                avant d’y ajouter un effet plastique pour renforcer
+                cette idée de pollution.
+
+                <br><br>
+
+                Le résultat est un élément graphique qui démontre
+                que cette soi-disant pollution visuelle est en réalité
+                un art éphémère.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJET 3.4 -->
+
+<div class="project-desc-overlay" id="proj-3-4">
+
+    <div class="desc-box">
+
+        <a href="#!" class="close-desc" aria-label="Fermer">
+            ✕
+        </a>
+
+        <div class="desc-img-container">
+
+            <img
+                src="image/graphicmatter.png"
+                alt="PROJET FANZINE Grand"
+            >
+
+        </div>
+
+
+        <div class="desc-text-container">
+
+            <h3>
+                GRAPHIC MATTER
+            </h3>
+
+            <p>
+                Pour ce projet, l’objectif était de retranscrire une
+                interview issue du podcast Graphic Matter et de la
+                mettre en forme sous la forme d’un livret, conçu pour
+                s’intégrer naturellement à la collection existante
+                du podcast, tout en y apportant notre propre touche
+                graphique et éditoriale.
+
+                <br><br>
+
+                Je suis tombée sur l’interview de Geoffroy Pithon.
+
+                <br><br>
+
+                J’ai d’abord sélectionné les passages qui me semblaient
+                les plus pertinents, avant de concevoir une mise en page
+                directement inspirée de son univers graphique, jouant
+                sur les superpositions et des titres faits à la main,
+                un élément déjà ancré dans l’identité du podcast.
+
+                <br><br>
+
+                L’enjeu était de m’approprier ces codes tout en assurant
+                une lecture fluide et agréable tout au long du livret.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================
+     JAVASCRIPT
+     ======================================================== -->
+
+<script>
+
+
+/* =========================================================
+   CARROUSELS
+   ========================================================= */
+
+document.querySelectorAll('.carousel').forEach((carousel) => {
+
+    const slides =
+        carousel.querySelectorAll('.carousel-slide');
+
+    const count =
+        carousel.querySelector('.carousel-count');
+
+    const nextButton =
+        carousel.querySelector('.next');
+
+    const prevButton =
+        carousel.querySelector('.prev');
+
+
+    /*
+       Sécurité :
+       on ne fait rien si le carousel n'a pas d'image.
+    */
+
+    if(!slides.length){
+        return;
+    }
+
+
+    let index = 0;
+
+
+    function show(newIndex){
+
+        /*
+           Retire la classe active de l'image actuelle.
+        */
+
+        slides[index].classList.remove('active');
+
+
+        /*
+           Permet de boucler :
+           dernière -> première
+           première -> dernière
+        */
+
+        index =
+            (newIndex + slides.length)
+            % slides.length;
+
+
+        slides[index].classList.add('active');
+
+
+        if(count){
+            count.textContent =
+                (index + 1) + ' / ' + slides.length;
+        }
+    }
+
+
+    /*
+       Compteur initial.
+    */
+
+    if(count){
+        count.textContent =
+            '1 / ' + slides.length;
+    }
+
+
+    /*
+       Bouton suivant.
+    */
+
+    if(nextButton){
+
+        nextButton.addEventListener('click', (event) => {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            show(index + 1);
+
+        });
+
+    }
+
+
+    /*
+       Bouton précédent.
+    */
+
+    if(prevButton){
+
+        prevButton.addEventListener('click', (event) => {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            show(index - 1);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       SWIPE MOBILE
+       ===================================================== */
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    let touchEndX = 0;
+    let touchEndY = 0;
+
+
+    carousel.addEventListener(
+        'touchstart',
+        (event) => {
+
+            if(!event.touches.length){
+                return;
+            }
+
+            touchStartX =
+                event.touches[0].clientX;
+
+            touchStartY =
+                event.touches[0].clientY;
+
+        },
+        { passive:true }
+    );
+
+
+    carousel.addEventListener(
+        'touchend',
+        (event) => {
+
+            if(!event.changedTouches.length){
+                return;
+            }
+
+            touchEndX =
+                event.changedTouches[0].clientX;
+
+            touchEndY =
+                event.changedTouches[0].clientY;
+
+
+            const deltaX =
+                touchEndX - touchStartX;
+
+            const deltaY =
+                touchEndY - touchStartY;
+
+
+            /*
+               On ne déclenche le swipe que si le mouvement
+               horizontal est suffisamment important.
+
+               Cela évite de casser le scroll vertical du texte.
+            */
+
+            if(
+                Math.abs(deltaX) > 50 &&
+                Math.abs(deltaX) > Math.abs(deltaY)
+            ){
+
+                if(deltaX < 0){
+
+                    show(index + 1);
+
+                }else{
+
+                    show(index - 1);
+
+                }
+
+            }
+
+        },
+        { passive:true }
+    );
+
+});
+
+
+
+/* =========================================================
+   GESTION DES VIDÉOS
+   ========================================================= */
+
+function pauseInactiveVideos(){
+
+    const overlays =
+        document.querySelectorAll(
+            '.project-desc-overlay'
+        );
+
+
+    overlays.forEach((overlay) => {
+
+        const videos =
+            overlay.querySelectorAll('video');
+
+
+        const isActive =
+            overlay.matches(':target');
+
+
+        videos.forEach((video) => {
+
+            if(!isActive){
+
+                video.pause();
+
+            }
+
+        });
+
+    });
+
+}
+
+
+/*
+   Lorsqu'on change de popup.
+*/
+
+window.addEventListener(
+    'hashchange',
+    pauseInactiveVideos
+);
+
+
+/*
+   Au chargement.
+*/
+
+document.addEventListener(
+    'DOMContentLoaded',
+    pauseInactiveVideos
+);
+
+
+
+/* =========================================================
+   EMPÊCHER LE SCROLL DE LA PAGE DERRIÈRE UN POPUP
+   ========================================================= */
+
+function updateBodyScroll(){
+
+    const activeOverlay =
+        document.querySelector(
+            '.project-desc-overlay:target'
+        );
+
+
+    /*
+       On bloque le scroll du body uniquement lorsqu'un
+       popup est ouvert.
+
+       Cela fonctionne particulièrement bien sur mobile.
+    */
+
+    if(activeOverlay){
+
+        document.body.style.overflow = 'hidden';
+
+    }else{
+
+        document.body.style.overflow = '';
+
+    }
+
+}
+
+
+window.addEventListener(
+    'hashchange',
+    updateBodyScroll
+);
+
+
+document.addEventListener(
+    'DOMContentLoaded',
+    updateBodyScroll
+);
+
+
+
+/* =========================================================
+   FERMETURE DES POPUPS AVEC ESC
+   ========================================================= */
+
+document.addEventListener(
+    'keydown',
+    (event) => {
+
+        if(event.key === 'Escape'){
+
+            /*
+               On retire le hash uniquement si une popup
+               est actuellement ouverte.
+            */
+
+            if(
+                window.location.hash &&
+                window.location.hash.startsWith('#proj-')
+            ){
+
+                history.pushState(
+                    '',
+                    document.title,
+                    window.location.pathname +
+                    window.location.search
+                );
+
+                updateBodyScroll();
+                pauseInactiveVideos();
+
+            }
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   FERMETURE EN CLIQUANT SUR LE FOND
+   ========================================================= */
+
+document
+    .querySelectorAll('.project-desc-overlay')
+    .forEach((overlay) => {
+
+        overlay.addEventListener(
+            'click',
+            (event) => {
+
+                /*
+                   Si on clique directement sur le fond,
+                   on ferme.
+
+                   Si on clique sur la desc-box, on ne ferme pas.
+                */
+
+                if(event.target === overlay){
+
+                    history.pushState(
+                        '',
+                        document.title,
+                        window.location.pathname +
+                        window.location.search
+                    );
+
+                    updateBodyScroll();
+                    pauseInactiveVideos();
+
+                }
+
+            }
+        );
+
+    });
+
+
+</script>
+
+</body>
+</html>
