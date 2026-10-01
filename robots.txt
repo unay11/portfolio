@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-psi-murex-62.vercel.app/sitemap.xml
